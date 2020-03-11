@@ -41,7 +41,8 @@ namespace WebApplication1.Controllers
 
         public IActionResult Cadastro(Aluno aluno) 
         {
-            if (!ModelState.IsValid) {
+            if (!ModelState.IsValid) 
+            {
                 return BadRequest();
             }
             return View();
