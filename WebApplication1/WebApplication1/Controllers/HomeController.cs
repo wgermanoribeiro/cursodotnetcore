@@ -9,7 +9,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    [Route("")]
+    
 
 
     public class HomeController : Controller
@@ -22,15 +22,39 @@ namespace WebApplication1.Controllers
         }
 
 
-        [Route("")]
-        [Route("pagina-inicial")]
-        public IActionResult Index(int id)
-        {            
-            return View();
+        public IActionResult Index()
+        {
+            Usuario user = new Usuario
+            {
+                ID = 1,
+                PrimeiroNome = "Biru",
+                UltimoNome = "Leibe",
+                Login = "Biruleibe",
+                Email = "biruleibe@gmail.com",
+                DataNascimento = DateTime.Now,
+                Telefone = "(14)98812-5477"
+            };
+
+            return RedirectToAction("Envio", user);            
+            
+        }
+
+        public IActionResult Envio(Usuario user)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            return View(user);
         }
 
 
-        
+
+
+
+
+
+
         [Route("adicao/{valor1:double}/{valor2:double}")]
         public IActionResult Adicao(double valor1, double valor2)
         {
@@ -73,5 +97,9 @@ namespace WebApplication1.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
+
+       
     }
 }
